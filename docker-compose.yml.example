@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  nano-bots:
+    image: nano-bots
+    environment:
+      ENVIRONMENT: production
+      PORT: 3048
+      OPENAI_API_ADDRESS: https://api.openai.com
+      OPENAI_API_ACCESS_TOKEN: your-token
+      OPENAI_API_USER_IDENTIFIER: your-user
+      NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
+    ports:
+      - 3048:3048
+    volumes:
+      - /home/user/.local/share/nano-bots/cartridges:/cartridges
