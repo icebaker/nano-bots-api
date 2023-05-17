@@ -23,6 +23,16 @@ module CartridgesController
       }
     end
 
+    default_override = cartridges.find do |cartridge|
+      cartridge[:system][:id].to_s.downcase == 'default'
+    end
+
+    if default_override
+      cartridges = cartridges.filter do |cartridge|
+        cartridge[:system][:id] != '-' && cartridge[:system][:id].to_s.downcase != 'default'
+      end.prepend(default_override)
+    end
+
     { body: cartridges, status: 200 }
   end
 
