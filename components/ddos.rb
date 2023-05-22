@@ -15,13 +15,13 @@ class DDOS
     # No access without the NANO_BOTS_USER_IDENTIFIER header.
     Rack::Attack.blocklist('No User Identifier') do |request|
       identifier = request.get_header('HTTP_NANO_BOTS_USER_IDENTIFIER')
-      identifier.nil? || identifier.to_s.strip.empty?
+      request.path != '/' && (identifier.nil? || identifier.to_s.strip.empty?)
     end
 
     # How many free OpenAI Requests are you willing to allow?
     # 100 people making 1 request every 5 seconds results in 1,200 requests per minute.
-    Rack::Attack.throttle('OpenAI Requests', limit: 1200, period: 60 * SECONDS) do |req|
-      'openai' if req.post? && (req.path == '/cartridges' || req.path == '/cartridges/stream')
+    Rack::Attack.throttle('OpenAI Requests', limit: 1200, period: 60 * SECONDS) do |request|
+      'openai' if request.post? && (request.path == '/cartridges' || request.path == '/cartridges/stream')
     end
 
     # How many requests other than Open AI's ones are you willing to allow?

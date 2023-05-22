@@ -1,2 +1,4 @@
 .env
 docker-compose.yml
+newrelic.yml
+log/

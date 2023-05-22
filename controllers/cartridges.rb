@@ -66,7 +66,7 @@ module CartridgesController
 
     state = Stream.template if state.nil?
 
-    { body: state, status: 200 }
+    { body: state, status: state[:state] == 'failed' ? 500 : 200 }
   end
 
   def self.create_stream(params)
@@ -84,6 +84,10 @@ module CartridgesController
           Stream.instance.get(stream[:id])[:state] = 'finished'
         end
       end
+    rescue StandardError => e
+      Stream.instance.get(stream[:id])[:finished_at] = Time.now
+      Stream.instance.get(stream[:id])[:state] = 'failed'
+      Stream.instance.get(stream[:id])[:error] = { message: e.message, backtrace: e.backtrace }
     end
 
     { body: stream, status: 200 }
