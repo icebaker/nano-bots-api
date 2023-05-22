@@ -74,9 +74,9 @@ module CartridgesController
 
     stream = Stream.instance.create
 
-    Thread.new do
-      nbot = NanoBot.new(cartridge: params['cartridge'], state: params['state'])
+    nbot = NanoBot.new(cartridge: params['cartridge'], state: params['state'])
 
+    Thread.new do
       nbot.eval(params['input']) do |content, _fragment, finished|
         Stream.instance.get(stream[:id])[:output] = content
         if finished
