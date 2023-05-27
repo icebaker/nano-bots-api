@@ -13,6 +13,7 @@ COPY . /nano-bots
 RUN rm /nano-bots/Gemfile.lock
 COPY --from=builder-gems /build/shared/Gemfile.lock /nano-bots/Gemfile.lock
 RUN rm -rf /nano-bots/.env && touch /nano-bots/.env
+RUN mkdir /.local && chown 1000:1000 /.local
 
 USER 1000
 RUN bundle config set --local without 'development:test'
