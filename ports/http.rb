@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 require_relative '../controllers/index'
+require_relative '../controllers/debug'
 require_relative '../controllers/cartridges'
 
 module HTTP
   def self.routes(route, request, response)
     route.root do
       IndexController.handler
+    end
+
+    route.get 'debug' do
+      DebugController.handler
     end
 
     route.get 'cartridges' do
