@@ -62,6 +62,88 @@ docker-compose up -d
 }
 ```
 
+`POST /cartridges`
+```json
+{
+  "cartridge": {
+    "meta": {
+      "symbol": "🤖",
+      "name": "Nano Bot Name",
+      "author": "Your Name",
+      "version": "1.0.0",
+      "license": "CC0-1.0",
+      "description": "A helpful assistant."
+    },
+    "behaviors": {
+      "interaction": {
+        "directive": "You are a helpful assistant."
+      }
+    },
+    "interfaces": {
+      "repl": {
+        "prompt": [
+          { "text": "🤖" },
+          { "text": "> ", "color": "blue" }
+        ]
+      }
+    },
+    "provider": {
+      "name": "openai",
+      "settings": {
+        "model": "gpt-3.5-turbo",
+        "credentials": {
+          "address": "ENV/OPENAI_API_ADDRESS",
+          "access-token": "ENV/OPENAI_API_ACCESS_TOKEN",
+          "user-identifier": "ENV/OPENAI_API_USER_IDENTIFIER"
+        }
+      }
+    }
+  },
+  "state": "-",
+  "input": "hi"
+}
+```
+
+`POST /cartridges`
+```json
+{
+  "as": "repl",
+  "action": "boot",
+  "cartridge": "-",
+  "state": "a21179b6104703af19328485101be839"
+}
+```
+
+`POST /cartridges`
+```json
+{
+  "as": "repl",
+  "action": "eval",
+  "cartridge": "-",
+  "state": "a21179b6104703af19328485101be839"
+}
+```
+
+`POST /cartridges`
+```json
+{
+  "as": "eval",
+  "action": "boot",
+  "cartridge": "-",
+  "state": "a21179b6104703af19328485101be839"
+}
+```
+
+`POST /cartridges`
+```json
+{
+  "as": "eval",
+  "action": "eval",
+  "cartridge": "-",
+  "state": "a21179b6104703af19328485101be839"
+}
+```
+
 `POST /cartridges/stream`
 ```json
 {
