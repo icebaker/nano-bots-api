@@ -130,7 +130,7 @@ docker-compose up -d
   "as": "eval",
   "action": "boot",
   "cartridge": "-",
-  "state": "a21179b6104703af19328485101be839"
+  "state": "5677e56bbff1e8137c8eb1f60d2623ac"
 }
 ```
 
@@ -140,11 +140,14 @@ docker-compose up -d
   "as": "eval",
   "action": "eval",
   "cartridge": "-",
-  "state": "a21179b6104703af19328485101be839"
+  "state": "5677e56bbff1e8137c8eb1f60d2623ac"
 }
 ```
 
 `POST /cartridges/stream`
+
+The same payloads that were used for `POST /cartridges`:
+
 ```json
 {
   "cartridge": "-",
