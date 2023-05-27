@@ -11,6 +11,7 @@ services:
       OPENAI_API_USER_IDENTIFIER: your-user
       NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
       NANO_BOTS_RACK_ATTACK: false
+      NANO_BOTS_NEW_RELIC: false
     ports:
       - 3048:3048
     volumes:
