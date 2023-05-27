@@ -77,12 +77,25 @@ module CartridgesController
     nbot = NanoBot.new(cartridge: params['cartridge'], state: params['state'])
 
     Thread.new do
-      nbot.eval(params['input']) do |content, _fragment, finished|
-        Stream.instance.get(stream[:id])[:output] = content
-        if finished
-          Stream.instance.get(stream[:id])[:finished_at] = Time.now
-          Stream.instance.get(stream[:id])[:state] = 'finished'
-        end
+      as = params['as'] || 'eval'
+
+      callback = lambda do |content, _fragment, finished|
+        Stream.instance.get(stream[:id])[:output] = if finished
+                                                      "#{content}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
+                                                    else
+                                                      content
+                                                    end
+
+        return unless finished
+
+        Stream.instance.get(stream[:id])[:finished_at] = Time.now
+        Stream.instance.get(stream[:id])[:state] = 'finished'
+      end
+
+      if params['action'] == 'boot'
+        nbot.boot(as:, &callback)
+      else
+        nbot.eval(params['input'], as:, &callback)
       end
     rescue StandardError => e
       Stream.instance.get(stream[:id])[:finished_at] = Time.now
@@ -99,7 +112,15 @@ module CartridgesController
 
     state = Stream.template
     state[:started_at] = Time.now
-    state[:output] = nbot.eval(params['input'])
+
+    as = params['as'] || 'eval'
+
+    state[:output] = if params['action'] == 'boot'
+                       "#{nbot.boot(as:)}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
+                     else
+                       "#{nbot.eval(params['input'], as:)}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
+                     end
+
     state[:state] = 'finished'
     state[:finished_at] = Time.now
 
