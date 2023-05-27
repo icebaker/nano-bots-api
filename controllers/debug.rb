@@ -13,6 +13,7 @@ module DebugController
         version: NanoBot.version
       },
       rainbow: {
+        term: ENV['TERM'],
         enabled: Rainbow.enabled,
         ansi: Rainbow('hi').red,
         x11: Rainbow('hi').aliceblue
