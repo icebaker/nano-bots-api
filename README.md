@@ -10,7 +10,7 @@ The Nano Bots API leverages [ruby-nano-bots](https://github.com/icebaker/ruby-na
 
 ## Public API
 
-This API is available for free as a public API at https://api.nbots.io.
+This API is available for free as a public API at: https://api.nbots.io
 
 It is used to power the following projects:
 
