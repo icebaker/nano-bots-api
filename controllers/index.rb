@@ -5,8 +5,9 @@ module IndexController
     {
       project: 'Nano Bots API',
       version: '0.0.2',
-      github: 'https://github.com/icebaker/nano-bots-api',
-      documentation: 'https://spec.nbots.io'
+      documentation: 'https://spec.nbots.io',
+      'live-editor': 'https://clinic.nbots.io',
+      github: 'https://github.com/icebaker/nano-bots-api'
     }
   end
 end
