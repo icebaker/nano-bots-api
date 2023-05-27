@@ -81,7 +81,11 @@ module CartridgesController
 
       callback = lambda do |content, _fragment, finished|
         Stream.instance.get(stream[:id])[:output] = if finished
-                                                      "#{content}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
+                                                      "#{content}#{if as == 'repl'
+                                                                     "#{content == '' ? '' : "\n"}#{nbot.prompt}"
+                                                                   else
+                                                                     ''
+                                                                   end}"
                                                     else
                                                       content
                                                     end
@@ -116,7 +120,12 @@ module CartridgesController
     as = params['as'] || 'eval'
 
     state[:output] = if params['action'] == 'boot'
-                       "#{nbot.boot(as:)}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
+                       content = nbot.boot(as:)
+                       "#{content}#{if as == 'repl'
+                                      "#{content == '' ? '' : "\n"}#{nbot.prompt}"
+                                    else
+                                      ''
+                                    end}"
                      else
                        "#{nbot.eval(params['input'], as:)}#{as == 'repl' ? "\n#{nbot.prompt}" : ''}"
                      end
