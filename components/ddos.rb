@@ -26,6 +26,8 @@ class DDOS
 
     # How many requests other than Open AI's ones are you willing to allow?
     # If 1 person makes 1 request every 1 millisecond, the result is 60,000 requests per minute.
-    Rack::Attack.throttle('Overall by IP', limit: 60_000, period: 60 * SECONDS, &:ip)
+    Rack::Attack.throttle('Overall by IP', limit: 60_000, period: 60 * SECONDS) do |request|
+      request.env['HTTP_X_FORWARDED_FOR']&.split(',')&.first || request.ip
+    end
   end
 end

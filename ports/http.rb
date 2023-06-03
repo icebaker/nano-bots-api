@@ -6,12 +6,14 @@ require_relative '../controllers/cartridges'
 
 module HTTP
   def self.routes(route, request, response)
+    ip = request.env['HTTP_X_FORWARDED_FOR']&.split(',')&.first || request.ip
+
     route.root do
       IndexController.handler
     end
 
     route.get 'debug' do
-      DebugController.handler
+      DebugController.handler({ ip: }, request)
     end
 
     route.get 'cartridges' do
