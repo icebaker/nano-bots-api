@@ -2,6 +2,8 @@
 
 require 'nano-bots'
 
+require 'newrelic_rpm' if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+
 require_relative '../components/stream'
 
 module CartridgesController
@@ -80,7 +82,13 @@ module CartridgesController
       environment:
     )
 
-    Thread.new do
+    thread_klass = if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+                     NewRelic::TracedThread
+                   else
+                     Thread
+                   end
+
+    thread_klass.new do
       as = params['as'] || 'eval'
 
       callback = lambda do |content, _fragment, finished|
