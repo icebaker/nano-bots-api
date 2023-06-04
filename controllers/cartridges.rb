@@ -2,6 +2,8 @@
 
 require 'nano-bots'
 
+require 'newrelic_rpm' if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+
 require_relative '../components/stream'
 
 module CartridgesController
@@ -69,14 +71,24 @@ module CartridgesController
     { body: state, status: state[:state] == 'failed' ? 500 : 200 }
   end
 
-  def self.create_stream(params)
+  def self.create_stream(params, environment)
     params = JSON.parse(params)
 
     stream = Stream.instance.create
 
-    nbot = NanoBot.new(cartridge: params['cartridge'], state: params['state'])
+    nbot = NanoBot.new(
+      cartridge: params['cartridge'],
+      state: params['state'],
+      environment:
+    )
 
-    Thread.new do
+    thread_klass = if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+                     NewRelic::TracedThread
+                   else
+                     Thread
+                   end
+
+    thread_klass.new do
       as = params['as'] || 'eval'
 
       callback = lambda do |content, _fragment, finished|
@@ -110,9 +122,13 @@ module CartridgesController
     { body: stream, status: 200 }
   end
 
-  def self.run(params)
+  def self.run(params, environment)
     params = JSON.parse(params)
-    nbot = NanoBot.new(cartridge: params['cartridge'], state: params['state'])
+    nbot = NanoBot.new(
+      cartridge: params['cartridge'],
+      state: params['state'],
+      environment:
+    )
 
     state = Stream.template
     state[:started_at] = Time.now

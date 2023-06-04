@@ -23,7 +23,7 @@ It is used to power the following projects:
 
 Requirements:
 ```bash
-build-essential libffi-dev lua5.4-dev
+build-essential libffi-dev libsodium-dev lua5.4-dev
 ```
 
 Copy the `.env.example` file to `.env` and fill in the necessary data and run the server:
@@ -100,14 +100,14 @@ docker-compose up -d
       }
     },
     "provider": {
-      "name": "openai",
+      "id": "openai",
+      "credentials": {
+        "address": "ENV/OPENAI_API_ADDRESS",
+        "access-token": "ENV/OPENAI_API_KEY"
+      },
       "settings": {
-        "model": "gpt-3.5-turbo",
-        "credentials": {
-          "address": "ENV/OPENAI_API_ADDRESS",
-          "access-token": "ENV/OPENAI_API_ACCESS_TOKEN",
-          "user-identifier": "ENV/OPENAI_API_USER_IDENTIFIER"
-        }
+        "user": "ENV/NANO_BOTS_END_USER",
+        "model": "gpt-3.5-turbo"
       }
     }
   },

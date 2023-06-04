@@ -7,8 +7,9 @@ services:
       ENVIRONMENT: production
       PORT: 3048
       OPENAI_API_ADDRESS: https://api.openai.com
-      OPENAI_API_ACCESS_TOKEN: your-token
-      OPENAI_API_USER_IDENTIFIER: your-user
+      OPENAI_API_KEY: your-token
+      NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
+      NANO_BOTS_END_USER: your-user
       NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
       NANO_BOTS_RACK_ATTACK: false
       NANO_BOTS_NEW_RELIC: false
