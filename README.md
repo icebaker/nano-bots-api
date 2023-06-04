@@ -5,6 +5,7 @@ The Nano Bots API leverages [ruby-nano-bots](https://github.com/icebaker/ruby-na
 - [Public API](#public-api)
 - [Running](#running)
   - [Docker](#docker)
+- [Security and Privacy](#security-and-privacy)
 - [API](#api)
 - [Development](#Development)
 
@@ -43,6 +44,12 @@ cp docker-compose.example.yml docker-compose.yml # Provide your credentials.
 docker-compose up -d
 # http://localhost:3048
 ```
+
+## Security and Privacy
+
+Read the Ruby Nano Bots documentation to learn about [security and privacy features](https://github.com/icebaker/ruby-nano-bots#security-and-privacy).
+
+We strongly recommend that you define a `NANO_BOTS_ENCRYPTION_PASSWORD` to increase the security and privacy of your users.
 
 ## API
 
