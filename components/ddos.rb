@@ -12,9 +12,9 @@ class DDOS
 
     Rack::Attack.cache.store = FakeRedis.new
 
-    # No access without the NANO_BOTS_USER_IDENTIFIER header.
+    # No access without the NANO_BOTS_END_USER header.
     Rack::Attack.blocklist('No User Identifier') do |request|
-      identifier = request.get_header('HTTP_NANO_BOTS_USER_IDENTIFIER')
+      identifier = request.get_header('HTTP_NANO_BOTS_END_USER')
       request.path != '/' && (identifier.nil? || identifier.to_s.strip.empty?)
     end
 

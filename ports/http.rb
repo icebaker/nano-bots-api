@@ -12,7 +12,7 @@ module HTTP
     ip = request.env['HTTP_X_FORWARDED_FOR']&.split(',')&.first || request.ip
 
     environment = {
-      NANO_BOTS_USER_IDENTIFIER: "#{ip}/#{request.get_header('HTTP_NANO_BOTS_USER_IDENTIFIER')}"
+      NANO_BOTS_END_USER: "#{ip}/#{request.get_header('HTTP_NANO_BOTS_END_USER')}"
     }
 
     route.root do
