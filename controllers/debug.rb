@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../static/api'
 require 'rainbow'
 require 'nano-bots'
 
@@ -9,6 +10,7 @@ module DebugController
       ruby: {
         version: RUBY_VERSION
       },
+      api: API,
       'nano-bots': {
         version: NanoBot.version
       },
