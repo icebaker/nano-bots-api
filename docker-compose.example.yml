@@ -6,6 +6,7 @@ services:
     environment:
       ENVIRONMENT: production
       PORT: 3048
+      NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
       OPENAI_API_ADDRESS: https://api.openai.com
       OPENAI_API_ACCESS_TOKEN: your-token
       OPENAI_API_USER_IDENTIFIER: your-user

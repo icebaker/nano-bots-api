@@ -23,7 +23,7 @@ It is used to power the following projects:
 
 Requirements:
 ```bash
-build-essential libffi-dev lua5.4-dev
+build-essential libffi-dev libsodium-dev lua5.4-dev
 ```
 
 Copy the `.env.example` file to `.env` and fill in the necessary data and run the server:
