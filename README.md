@@ -6,6 +6,7 @@ The Nano Bots API leverages [ruby-nano-bots](https://github.com/icebaker/ruby-na
 - [Running](#running)
   - [Docker](#docker)
 - [Security and Privacy](#security-and-privacy)
+  - [Tools (Functions)](#tools-functions)
 - [API](#api)
 - [Development](#Development)
 
@@ -50,6 +51,12 @@ docker-compose up -d
 Read the Ruby Nano Bots documentation to learn about [security and privacy features](https://github.com/icebaker/ruby-nano-bots#security-and-privacy).
 
 We strongly recommend that you define a `NANO_BOTS_ENCRYPTION_PASSWORD` to increase the security and privacy of your users.
+
+### Tools (Functions)
+
+The API ensures that Tools (Functions) run in sandboxed mode when the environment variable `FORCE_SANDBOXED` is set to `true`. You may set it to `false` at your own risk. Learn more about what being sandboxed means in the [Nano Bots specification](https://spec.nbots.io/#/README?id=functions).
+
+Also, the API does not allow `confirmable` tools; as per the current implementation, it would block requests without being able to collect a confirmation answer from users.
 
 ## API
 

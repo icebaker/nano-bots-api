@@ -6,22 +6,22 @@ source 'https://rubygems.org'
 
 gem 'dotenv', '~> 2.8', '>= 2.8.1'
 
-gem 'rack', '~> 2.2', '>= 2.2.7'
+gem 'rack', '~> 3.0', '>= 3.0.8'
 gem 'rack-cors', '~> 2.0', '>= 2.0.1'
-gem 'rackup', '~> 1.0'
+gem 'rackup', '~> 2.1'
 
-gem 'puma', '~> 6.3'
-gem 'rack-attack', '~> 6.6', '>= 6.6.1'
-gem 'roda', '~> 3.68'
+gem 'puma', '~> 6.4'
+gem 'rack-attack', '~> 6.7'
+gem 'roda', '~> 3.74'
 
 gem 'concurrent-ruby', '~> 1.2', '>= 1.2.2'
 
-gem 'newrelic_rpm', '~> 9.2', '>= 9.2.2'
+gem 'newrelic_rpm', '~> 9.6'
 
-gem 'nano-bots', '~> 0.1.1'
+gem 'nano-bots', '~> 1.0'
 
 group :test, :development do
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
   gem 'rerun', '~> 0.14.0'
-  gem 'rubocop', '~> 1.48', '>= 1.48.1'
+  gem 'rubocop', '~> 1.57', '>= 1.57.2'
 end

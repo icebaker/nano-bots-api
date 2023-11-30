@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './fake_redis'
+require_relative 'fake_redis'
 
 class DDOS
   SECONDS = 1

@@ -4,7 +4,8 @@ require 'nano-bots'
 
 require 'newrelic_rpm' if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
 
-require_relative '../components/stream'
+require './components/stream'
+require './logic/safety'
 
 module CartridgesController
   def self.index
@@ -77,7 +78,7 @@ module CartridgesController
     stream = Stream.instance.create
 
     nbot = NanoBot.new(
-      cartridge: params['cartridge'],
+      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge']),
       state: params['state'],
       environment:
     )
@@ -125,7 +126,7 @@ module CartridgesController
   def self.run(params, environment)
     params = JSON.parse(params)
     nbot = NanoBot.new(
-      cartridge: params['cartridge'],
+      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge']),
       state: params['state'],
       environment:
     )
