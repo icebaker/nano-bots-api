@@ -1,19 +1,20 @@
-version: '3.7'
-
 services:
   nano-bots:
     image: nano-bots
     environment:
       ENVIRONMENT: production
       PORT: 3048
+      RUN_DANGEROUSLY_AS_SUDO: "false"
+      RVM: "false"
+      FORCE_SANDBOXED: "true"
       OPENAI_API_ADDRESS: https://api.openai.com
       OPENAI_API_KEY: your-token
       NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
       NANO_BOTS_END_USER: your-user
       NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
-      NANO_BOTS_RACK_ATTACK: false
-      NANO_BOTS_NEW_RELIC: false
+      NANO_BOTS_RACK_ATTACK: "false"
+      NANO_BOTS_NEW_RELIC: "false"
     ports:
       - 3048:3048
     volumes:
-      - /home/user/.local/share/nano-bots/cartridges:/cartridges
+      - /home/your-user/.local/share/nano-bots/cartridges:/cartridges
