@@ -18,10 +18,10 @@ gem 'concurrent-ruby', '~> 1.2', '>= 1.2.2'
 
 gem 'newrelic_rpm', '~> 9.6'
 
-gem 'nano-bots', '~> 1.0'
+gem 'nano-bots', '~> 1.0.1'
 
 group :test, :development do
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
   gem 'rerun', '~> 0.14.0'
-  gem 'rubocop', '~> 1.57', '>= 1.57.2'
+  gem 'rubocop', '~> 1.58'
 end

@@ -17,14 +17,14 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
     ffi (1.16.3)
-    json (2.6.3)
+    json (2.7.0)
     language_server-protocol (3.17.0.3)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     method_source (1.0.0)
     multipart-post (2.3.0)
-    nano-bots (1.0.0)
+    nano-bots (1.0.1)
       babosa (~> 2.0)
       concurrent-ruby (~> 1.2, >= 1.2.2)
       dotenv (~> 2.8, >= 2.8.1)
@@ -36,7 +36,7 @@ GEM
       sweet-moon (~> 0.0.7)
     newrelic_rpm (9.6.0)
       base64
-    nio4r (2.6.1)
+    nio4r (2.7.0)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
@@ -70,7 +70,7 @@ GEM
     rexml (3.2.6)
     roda (3.74.0)
       rack
-    rubocop (1.57.2)
+    rubocop (1.58.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -78,7 +78,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.1, < 2.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
@@ -100,7 +100,7 @@ PLATFORMS
 DEPENDENCIES
   concurrent-ruby (~> 1.2, >= 1.2.2)
   dotenv (~> 2.8, >= 2.8.1)
-  nano-bots (~> 1.0)
+  nano-bots (~> 1.0.1)
   newrelic_rpm (~> 9.6)
   pry-byebug (~> 3.10, >= 3.10.1)
   puma (~> 6.4)
@@ -110,7 +110,7 @@ DEPENDENCIES
   rackup (~> 2.1)
   rerun (~> 0.14.0)
   roda (~> 3.74)
-  rubocop (~> 1.57, >= 1.57.2)
+  rubocop (~> 1.58)
 
 RUBY VERSION
    ruby 3.2.2p53
