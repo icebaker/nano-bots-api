@@ -2,7 +2,7 @@
 
 API = {
   project: 'Nano Bots API',
-  version: '1.0.2',
+  version: '1.0.3',
   documentation: 'https://spec.nbots.io',
   'live-editor': 'https://clinic.nbots.io',
   github: 'https://github.com/icebaker/nano-bots-api'
