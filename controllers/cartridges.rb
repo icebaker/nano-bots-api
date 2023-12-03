@@ -130,7 +130,6 @@ module CartridgesController
       state: params['state'],
       environment:
     )
-
     state = Stream.template
     state[:started_at] = Time.now
 
