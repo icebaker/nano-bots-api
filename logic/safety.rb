@@ -13,10 +13,12 @@ module SafetyLogic
     cartridge.delete('safety')
 
     cartridge[:safety] = {} if cartridge[:safety].nil?
+    cartridge[:safety][:tools] = {} if cartridge[:safety][:tools].nil?
+    cartridge[:safety][:functions] = {} if cartridge[:safety][:functions].nil?
 
-    cartridge[:safety][:confirmable] = false
+    cartridge[:safety][:tools][:confirmable] = false
 
-    cartridge[:safety][:sandboxed] = true if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+    cartridge[:safety][:functions][:sandboxed] = true
 
     cartridge
   end
