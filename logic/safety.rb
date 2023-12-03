@@ -3,20 +3,40 @@
 require 'yaml'
 
 module SafetyLogic
-  def self.ensure_cartridge_is_safe_to_run(cartridge_input)
-    cartridge_input = '-' if cartridge_input == 'default'
+  def self.symbolize_keys(object)
+    case object
+    when ::Hash
+      object.each_with_object({}) do |(key, value), result|
+        result[key.to_sym] = symbolize_keys(value)
+      end
+    when Array
+      object.map { |e| symbolize_keys(e) }
+    else
+      object
+    end
+  end
 
+  def self.ensure_cartridge_is_safe_to_run(cartridge_input)
     cartridge = if cartridge_input.is_a?(Hash)
                   cartridge_input
                 else
-                  NanoBot.cartridges.find do |cartridge|
+                  found = NanoBot.cartridges.find do |cartridge|
                     cartridge[:system][:id].to_s == cartridge_input.to_s
                   end
+
+                  if found.nil? && cartridge_input == 'default'
+                    cartridge_input = '-'
+                    found = NanoBot.cartridges.find do |cartridge|
+                      cartridge[:system][:id].to_s == cartridge_input.to_s
+                    end
+                  end
+
+                  found
                 end
 
-    cartridge.delete('safety')
+    cartridge = SafetyLogic.symbolize_keys(cartridge)
 
-    if !cartridge['provider'] && !cartridge[:provider]
+    unless cartridge[:provider]
       cartridge[:provider] =
         YAML.safe_load_file('static/cartridges/default.yml', permitted_classes: [Symbol])['provider']
     end
@@ -27,7 +47,7 @@ module SafetyLogic
 
     cartridge[:safety][:tools][:confirmable] = false
 
-    cartridge[:safety][:functions][:sandboxed] = true
+    cartridge[:safety][:functions][:sandboxed] = true if ENV.fetch('FORCE_SANDBOXED', nil).to_s == 'true'
 
     cartridge
   end
