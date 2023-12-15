@@ -12,13 +12,13 @@ gem 'rackup', '~> 2.1'
 
 gem 'puma', '~> 6.4'
 gem 'rack-attack', '~> 6.7'
-gem 'roda', '~> 3.74'
+gem 'roda', '~> 3.75'
 
 gem 'concurrent-ruby', '~> 1.2', '>= 1.2.2'
 
 gem 'newrelic_rpm', '~> 9.6'
 
-gem 'nano-bots', '~> 1.1', '>= 1.1.1'
+gem 'nano-bots', '~> 1.2'
 
 group :test, :development do
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
