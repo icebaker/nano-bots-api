@@ -1,4 +1,5 @@
 .env
+google-credentials.json
 docker-compose.yml
 newrelic.yml
 log/

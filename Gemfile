@@ -18,7 +18,7 @@ gem 'concurrent-ruby', '~> 1.2', '>= 1.2.2'
 
 gem 'newrelic_rpm', '~> 9.6'
 
-gem 'nano-bots', '~> 1.2'
+gem 'nano-bots', '~> 2.1'
 
 group :test, :development do
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'

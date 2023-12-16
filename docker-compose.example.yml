@@ -4,17 +4,30 @@ services:
     environment:
       ENVIRONMENT: production
       PORT: 3048
+
       RUN_DANGEROUSLY_AS_SUDO: "false"
       RVM: "false"
+
       FORCE_SANDBOXED: "true"
+
       OPENAI_API_ADDRESS: https://api.openai.com
       OPENAI_API_KEY: your-token
+
+      GOOGLE_API_KEY: your-api-key
+
+      GOOGLE_CREDENTIALS_FILE_PATH: /root/.config/google-credentials.json
+      # GOOGLE_PROJECT_ID: your-project-id
+      GOOGLE_REGION: us-east4
+
       NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
       NANO_BOTS_END_USER: your-user
       NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
       NANO_BOTS_RACK_ATTACK: "false"
       NANO_BOTS_NEW_RELIC: "false"
+
     ports:
       - 3048:3048
+
     volumes:
+      - ./google-credentials.json:/root/.config/google-credentials.json
       - /home/your-user/.local/share/nano-bots/cartridges:/cartridges
