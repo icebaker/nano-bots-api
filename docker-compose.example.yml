@@ -19,6 +19,10 @@ services:
       # GOOGLE_PROJECT_ID: your-project-id
       GOOGLE_REGION: us-east4
 
+      MISTRAL_API_KEY: your-api-key
+
+      COHERE_API_KEY: your-api-key
+
       NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
       NANO_BOTS_END_USER: your-user
       NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
