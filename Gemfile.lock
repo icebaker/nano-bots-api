@@ -46,7 +46,7 @@ GEM
       faraday (~> 2.8, >= 2.8.1)
     multi_json (1.15.0)
     multipart-post (2.3.0)
-    nano-bots (2.4.0)
+    nano-bots (2.4.1)
       babosa (~> 2.0)
       cohere-ai (~> 1.0, >= 1.0.1)
       concurrent-ruby (~> 1.2, >= 1.2.2)
@@ -131,7 +131,7 @@ PLATFORMS
 DEPENDENCIES
   concurrent-ruby (~> 1.2, >= 1.2.2)
   dotenv (~> 2.8, >= 2.8.1)
-  nano-bots (~> 2.4)
+  nano-bots (~> 2.4, >= 2.4.1)
   newrelic_rpm (~> 9.6)
   pry-byebug (~> 3.10, >= 3.10.1)
   puma (~> 6.4)
