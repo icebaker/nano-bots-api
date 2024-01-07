@@ -38,7 +38,7 @@ bundle
 ### Docker
 
 ```sh
-git clone git@github.com:icebaker/nano-bots-api.git
+git clone https://github.com/icebaker/nano-bots-api.git
 cd nano-bots-api
 ./build.sh
 cp docker-compose.example.yml docker-compose.yml # Provide your credentials.
@@ -188,4 +188,10 @@ Once you've installed the dependencies with `bundle`, run Rubocop with the `-A` 
 
 ```sh
 rubocop -A
+```
+
+If you face issues upgrading gem versions:
+
+```sh
+bundle install --full-index
 ```
