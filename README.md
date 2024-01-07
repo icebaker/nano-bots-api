@@ -30,9 +30,15 @@ Requirements:
 build-essential libffi-dev libsodium-dev lua5.4-dev
 ```
 
+```sh
+git clone https://github.com/icebaker/nano-bots-api.git
+cd nano-bots-api
+```
+
 Copy the `.env.example` file to `.env` and fill in the necessary data and run the server:
 
 ```sh
+cp .env.example .env
 bundle
 ./init.sh
 ```
@@ -118,7 +124,6 @@ Also, the API does not allow `confirmable` tools; as per the current implementat
     "provider": {
       "id": "openai",
       "credentials": {
-        "address": "ENV/OPENAI_API_ADDRESS",
         "access-token": "ENV/OPENAI_API_KEY"
       },
       "settings": {
