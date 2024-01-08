@@ -18,10 +18,11 @@ This API is available for free as a public API at: https://api.nbots.io
 
 It is used to power the following projects:
 
-- [Nano Bots Marketplace](https://nbots.io)
-- [Nano Bots Clinic (Live Editor)](https://clinic.nbots.io)
 - [Nano Bots for Sublime Text](https://github.com/icebaker/sublime-nano-bots)
 - [Nano Bots for Visual Studio Code](https://github.com/icebaker/vscode-nano-bots)
+- [Nano Bots for Obsidian](https://github.com/icebaker/obsidian-nano-bots)
+- [Nano Bots Clinic (Live Editor)](https://clinic.nbots.io)
+- [Nano Bots Marketplace](https://nbots.io)
 
 ## Running
 
