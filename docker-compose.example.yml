@@ -9,11 +9,12 @@ services:
       RVM: "false"
 
       FORCE_SANDBOXED: "true"
+      ALLOW_CARTRIDGES_PATH_HEADER: "true"
 
       NANO_BOTS_ENCRYPTION_PASSWORD: UNSAFE
       NANO_BOTS_END_USER: your-user
-      NANO_BOTS_CARTRIDGES_DIRECTORY: /cartridges
-      # NANO_BOTS_STATE_DIRECTORY=/state
+      NANO_BOTS_CARTRIDGES_PATH: /cartridges
+      # NANO_BOTS_STATE_PATH=/state
       NANO_BOTS_RACK_ATTACK: "false"
       NANO_BOTS_NEW_RELIC: "false"
 

@@ -9,11 +9,18 @@ require 'newrelic_rpm' if ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
 module HTTP
   def self.routes(route, request, response)
     new_relic = ENV.fetch('NANO_BOTS_NEW_RELIC', nil).to_s == 'true'
+
     ip = request.env['HTTP_X_FORWARDED_FOR']&.split(',')&.first || request.ip
 
     environment = {
       NANO_BOTS_END_USER: "#{ip}-#{request.get_header('HTTP_NANO_BOTS_END_USER')}"
     }
+
+    cartridges_path = request.get_header('HTTP_NANO_BOTS_CARTRIDGES_PATH')
+
+    if ENV.fetch('ALLOW_CARTRIDGES_PATH_HEADER', nil).to_s == 'true' && !cartridges_path.to_s.strip.empty?
+      environment[:NANO_BOTS_CARTRIDGES_PATH] = cartridges_path
+    end
 
     route.root do
       NewRelic::Agent.set_transaction_name('GET/') if new_relic
@@ -27,7 +34,7 @@ module HTTP
 
     route.get 'cartridges' do
       NewRelic::Agent.set_transaction_name('GET/cartridges') if new_relic
-      result = CartridgesController.index
+      result = CartridgesController.index(environment)
       response.status = result[:status]
       result[:body]
     end
@@ -41,7 +48,7 @@ module HTTP
 
     route.post 'cartridges/source' do
       NewRelic::Agent.set_transaction_name('POST/cartridges/source') if new_relic
-      result = CartridgesController.source(request.body.read)
+      result = CartridgesController.source(request.body.read, environment)
       response.status = result[:status]
       result[:body]
     end

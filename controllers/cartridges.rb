@@ -8,8 +8,14 @@ require './components/stream'
 require './logic/safety'
 
 module CartridgesController
-  def self.index
-    cartridges = NanoBot.cartridges
+  def self.index(environment)
+    components = {}
+
+    if environment[:NANO_BOTS_CARTRIDGES_PATH]
+      components[:ENV] = { 'NANO_BOTS_CARTRIDGES_PATH' => environment[:NANO_BOTS_CARTRIDGES_PATH] }
+    end
+
+    cartridges = NanoBot.cartridges.all(components:)
 
     cartridges = cartridges.map do |cartridge|
       {
@@ -27,22 +33,28 @@ module CartridgesController
     end
 
     default_override = cartridges.find do |cartridge|
-      cartridge[:system][:id].to_s.downcase == 'default'
+      cartridge[:system][:id].to_s.downcase.strip == 'default'
     end
 
     if default_override
       cartridges = cartridges.filter do |cartridge|
-        cartridge[:system][:id] != '-' && cartridge[:system][:id].to_s.downcase != 'default'
+        cartridge[:system][:id] != '-' && cartridge[:system][:id].to_s.downcase.strip != 'default'
       end.prepend(default_override)
     end
 
     { body: cartridges, status: 200 }
   end
 
-  def self.source(params)
+  def self.source(params, environment)
     params = JSON.parse(params)
 
-    cartridge = NanoBot.cartridges.find do |cartridge|
+    components = {}
+
+    if environment[:NANO_BOTS_CARTRIDGES_PATH]
+      components[:ENV] = { 'NANO_BOTS_CARTRIDGES_PATH' => environment[:NANO_BOTS_CARTRIDGES_PATH] }
+    end
+
+    cartridge = NanoBot.cartridges.all(components:).find do |cartridge|
       cartridge[:system][:id] == params['id']
     end
 
@@ -73,12 +85,14 @@ module CartridgesController
   end
 
   def self.create_stream(params, environment)
+    status = 200
+
     params = JSON.parse(params)
 
     stream = Stream.instance.create
 
     nbot = NanoBot.new(
-      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge']),
+      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge'], environment),
       state: params['state'],
       environment:
     )
@@ -116,17 +130,18 @@ module CartridgesController
       end
     rescue StandardError => e
       Stream.instance.get(stream[:id])[:finished_at] = Time.now
+      status = 500
       Stream.instance.get(stream[:id])[:state] = 'failed'
       Stream.instance.get(stream[:id])[:error] = { message: e.message, backtrace: e.backtrace }
     end
 
-    { body: stream, status: 200 }
+    { body: stream, status: }
   end
 
   def self.run(params, environment)
     params = JSON.parse(params)
     nbot = NanoBot.new(
-      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge']),
+      cartridge: SafetyLogic.ensure_cartridge_is_safe_to_run(params['cartridge'], environment),
       state: params['state'],
       environment:
     )
@@ -150,5 +165,7 @@ module CartridgesController
     state[:finished_at] = Time.now
 
     { body: state, status: 200 }
+  rescue StandardError => e
+    { body: { error: { message: e.message, backtrace: e.backtrace } }, status: 500 }
   end
 end

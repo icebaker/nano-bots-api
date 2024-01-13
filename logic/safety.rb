@@ -16,17 +16,23 @@ module SafetyLogic
     end
   end
 
-  def self.ensure_cartridge_is_safe_to_run(cartridge_input)
+  def self.ensure_cartridge_is_safe_to_run(cartridge_input, environment)
+    components = {}
+
+    if environment[:NANO_BOTS_CARTRIDGES_PATH]
+      components[:ENV] = { 'NANO_BOTS_CARTRIDGES_PATH' => environment[:NANO_BOTS_CARTRIDGES_PATH] }
+    end
+
     cartridge = if cartridge_input.is_a?(Hash)
                   cartridge_input
                 else
-                  found = NanoBot.cartridges.find do |cartridge|
+                  found = NanoBot.cartridges.all(components:).find do |cartridge|
                     cartridge[:system][:id].to_s == cartridge_input.to_s
                   end
 
-                  if found.nil? && cartridge_input == 'default'
+                  if found.nil? && cartridge_input.to_s.downcase.strip == 'default'
                     cartridge_input = '-'
-                    found = NanoBot.cartridges.find do |cartridge|
+                    found = NanoBot.cartridges.all(components:).find do |cartridge|
                       cartridge[:system][:id].to_s == cartridge_input.to_s
                     end
                   end
@@ -37,8 +43,9 @@ module SafetyLogic
     cartridge = SafetyLogic.symbolize_keys(cartridge)
 
     unless cartridge[:provider]
-      cartridge[:provider] =
+      cartridge[:provider] = SafetyLogic.symbolize_keys(
         YAML.safe_load_file('static/cartridges/default.yml', permitted_classes: [Symbol])['provider']
+      )
     end
 
     cartridge[:safety] = {} if cartridge[:safety].nil?
