@@ -2,7 +2,7 @@ export $(grep -v '^#' .env | xargs)
 
 command="bundle exec rackup --server puma -o 0.0.0.0 -p $PORT"
 
-if [ "$ENVIRONMENT" = 'development' ]; then
+if [ "$RERUN" = 'true' ]; then
     command="bundle exec rerun -- $command"
 fi
 
