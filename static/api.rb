@@ -4,7 +4,7 @@ require 'nano-bots'
 
 API = {
   project: 'Nano Bots API',
-  version: '1.5.0',
+  version: '1.6.0',
   'nano-bots': { version: NanoBot.version, specification: NanoBot.specification },
   documentation: 'https://spec.nbots.io',
   'live-editor': 'https://clinic.nbots.io',
