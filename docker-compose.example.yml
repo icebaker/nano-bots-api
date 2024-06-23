@@ -18,6 +18,8 @@ services:
       NANO_BOTS_RACK_ATTACK: "false"
       NANO_BOTS_NEW_RELIC: "false"
 
+      ANTHROPIC_API_KEY: your-api-key
+
       COHERE_API_KEY: your-api-key
 
       # GOOGLE_API_KEY: your-api-key
