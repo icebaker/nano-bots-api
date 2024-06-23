@@ -2,7 +2,7 @@
 
 The Nano Bots API leverages [ruby-nano-bots](https://github.com/icebaker/ruby-nano-bots) to create an HTTP API, enabling you to integrate your [Nano Bots](https://spec.nbots.io) through web requests.
 
-Nano Bots are small, AI-powered bots that can be easily shared as a single file, designed to support multiple providers such as [Cohere Command](https://cohere.com), [Google Gemini](https://deepmind.google/technologies/gemini), [Maritaca AI MariTalk](https://www.maritaca.ai), [Mistral AI](https://mistral.ai), [Ollama](https://ollama.ai), [OpenAI ChatGPT](https://openai.com/chatgpt), and others, with support for calling tools (functions).
+Nano Bots are small, AI-powered bots that can be easily shared as a single file, designed to support multiple providers such as [Anthropic Claude](https://www.anthropic.com/claude), [Cohere Command](https://cohere.com), [Google Gemini](https://deepmind.google/technologies/gemini), [Maritaca AI MariTalk](https://www.maritaca.ai), [Mistral AI](https://mistral.ai), [Ollama](https://ollama.ai), [OpenAI ChatGPT](https://openai.com/chatgpt), and others, with support for calling tools (functions).
 
 - [Public API](#public-api)
 - [Running](#running)
